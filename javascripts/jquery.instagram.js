@@ -6,10 +6,10 @@
   	count: 10
   }
   var methods = {
-  	/**
-  	  * initilize the plugin
-  	  */
-    init : function( options ) {
+    /**
+      * Get images from your own stream
+      */
+    getMyStream : function( options ) {
     	if(options) {
     		$.extend(settings, options);
     	}
@@ -17,7 +17,7 @@
     	var e = this;
     	
     	$(e).html("<div id='instagramLoadingMessage'>" + settings.loading_message + "</div>");
-		getInstagramFeed(e, settings);
+		getInstagramFeed(e, settings, 'self');
     },
     /**
   	  * Show the content
@@ -33,9 +33,9 @@
     }
   };
   
-  function getInstagramFeed(e, settings) {
+  function getInstagramFeed(e, settings, user) {
   	$.ajax({
-		url: 'https://api.instagram.com/v1/users/self/media/recent?count='+ settings.count +'&access_token=' + settings.auth_token,
+		url: 'https://api.instagram.com/v1/users/'+ user +'/media/recent?count='+ settings.count +'&access_token=' + settings.auth_token,
 		dataType: 'jsonp',
 		success: function(result) {
 			$(e).html("");
