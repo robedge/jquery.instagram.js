@@ -1,0 +1,59 @@
+<!DOCTYPE html public>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="/stylesheets/instagram.css" />
+        
+        <!-- Internet Explorer HTML5 enabling code: -->
+        
+        <!--[if IE]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        
+        <style type="text/css">
+        .clear {
+          zoom: 1;
+          display: block;
+        }
+        </style>
+
+        
+        <![endif]-->
+    </head>
+    <body>
+    	<section id="page">
+            <header>
+                <hgroup>
+                    <h1>robedgell.com</h1>
+                    <h3>Awesome since 1981.</h3>
+                </hgroup>
+                <nav class="clear">
+                    <ul>
+    					<li><a href="/">Home</a></li>    
+					</ul>
+                </nav>
+            </header>
+            
+            <section id="articles">
+				<div id="instagram"></div>
+			</section>
+
+	        <footer>
+	           <div class="line"></div>
+			   <p>&copy; 2011 - robedgell.com</p>	         
+	        </footer>
+		</section> 
+        
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+        <script src="javascripts/jquery.instagram.js"></script>
+        
+        <script type="text/javascript">
+        	$(document).ready(function(){	
+				$("#instagram").instagram('init', {
+					count: "12"
+				});
+			});
+        </script>
+    </body>
+</html>
