@@ -1,6 +1,6 @@
 (function ($) {
     var settings = {
-        auth_token: "332178.5532830.304dcae9620749e086bac69712af2051", // replace with your token or pass a new value in the settings
+        auth_token: "", // replace with your token or pass a new value in the settings
         loading_message: "Finding and loading instagram stream...", // This can be any html you want to show for loading
         default_image: "#", // this will load a place holder image for until the instagram photo is loaded
         count: 10
