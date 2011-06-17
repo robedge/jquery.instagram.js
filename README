@@ -1,6 +1,6 @@
 ####
-This is a basic jquery plugin that will allow you to pull in an instagram feed.  
-Currently I only have methods built out to load in your own feed and to show / hide the block.
+This is a basic jquery plugin that will allow you to pull in an instagram feed.
+####
 
 ####
 USAGE
@@ -8,19 +8,42 @@ USAGE
 
 --- getMyStream
 
-<div id="instagram" />
+<div id="me" />
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
 <script src="javascripts/jquery.instagram.js"></script>
 
 $(document).ready(function() {
-	$("#instagram").instagram('getMyStream', {
+	$("#me").instagram('getMyStream', {
 		count: "12"
 	});
 });
 
---- Hide block
-$("#instagram").hide();
 
---- Show block
-$("#instagram").show();
+--- getUserStream
+
+<div id="user" />
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+<script src="javascripts/jquery.instagram.js"></script>
+
+$(document).ready(function() {
+	$("#user").instagram('getUserStream', {
+		count: "12",
+		user: 1574083
+	});
+});
+
+
+--- getMyLikes
+
+<div id="myLikes" />
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+<script src="javascripts/jquery.instagram.js"></script>
+
+$(document).ready(function() {
+	$("#myLikes").instagram('getMyLikes', {
+		count: "12"
+	});
+});
