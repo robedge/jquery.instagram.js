@@ -31,7 +31,12 @@
             </header>
             
             <section id="articles">
-				<div id="instagram"></div>
+                <h1>My Feed</h1>
+				<div id="me"></div>
+				<h1>Snoop's Feed</h1>
+				<div id="user"></div>
+				<h1>My Likes Feed</h1>
+				<div id="myLikes"></div>
 			</section>
 
 	        <footer>
@@ -45,7 +50,16 @@
         
         <script type="text/javascript">
         	$(document).ready(function(){	
-				$("#instagram").instagram('getMyStream', {
+        	    $("#me").instagram('getMyStream', {
+					count: "12"
+				});
+				
+				$("#user").instagram('getUserStream', {
+					count: "12",
+					user: 1574083
+				});
+				
+				$("#myLikes").instagram('getMyLikes', {
 					count: "12"
 				});
 			});
