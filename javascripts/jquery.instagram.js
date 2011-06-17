@@ -1,8 +1,7 @@
 (function ($) {
     var settings = {
-        auth_token: "", // replace with your token or pass a new value in the settings
-        loading_message: "Finding and loading instagram stream...", // This can be any html you want to show for loading
-        default_image: "#", // this will load a place holder image for until the instagram photo is loaded
+        authToken: "332178.5532830.304dcae9620749e086bac69712af2051", // replace with your token or pass a new value in the settings
+        loadingMessage: "Finding and loading instagram stream...", // This can be any html you want to show for loading
         count: 10
     }
     var methods = {
@@ -19,7 +18,7 @@
                 getInstagramFeed(
                     $e, 
                     settings, 
-                    'https://api.instagram.com/v1/users/self/media/recent?count=' + settings.count + '&access_token=' + settings.auth_token);
+                    'https://api.instagram.com/v1/users/self/media/recent?count=' + settings.count + '&access_token=' + settings.authToken);
             });
         },
         /**
@@ -35,7 +34,7 @@
                 getInstagramFeed(
                     $e, 
                     settings, 
-                    'https://api.instagram.com/v1/users/' + settings.user + '/media/recent?count=' + settings.count + '&access_token=' + settings.auth_token
+                    'https://api.instagram.com/v1/users/' + settings.user + '/media/recent?count=' + settings.count + '&access_token=' + settings.authToken
                 );
             });
         },
@@ -52,14 +51,14 @@
                 getInstagramFeed(
                     $e,
                     settings,
-                    'https://api.instagram.com/v1/users/self/media/liked?count=' + settings.count + '&access_token=' + settings.auth_token
+                    'https://api.instagram.com/v1/users/self/media/liked?count=' + settings.count + '&access_token=' + settings.authToken
                 );
             });
         }
     };
 
     function initLoad(e, callback) {
-        e.html("<div id='instagramLoadingMessage'>" + settings.loading_message + "</div>");
+        e.html("<div id='instagramLoadingMessage'>" + settings.loadingMessage + "</div>");
         if (typeof(callback) == 'function') {
             callback();
         }
@@ -73,7 +72,7 @@
             success: function (result) {
                 e.html("");
                 $.each(result.data, function (i) {
-                    e.append("<img style='display: none;' id='" + id + '_'  + i + "' class='instagramPhoto' src='" + settings.default_image + "' />");
+                    e.append("<img style='display: none;' id='" + id + '_'  + i + "' class='instagramPhoto' src='" + settings.defaultImage + "' />");
                     
                     $('#' + id + '_' + i).load(function () {
                         $(this).fadeIn('fast');
