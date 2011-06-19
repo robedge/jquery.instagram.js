@@ -6,44 +6,57 @@ This is a basic jquery plugin that will allow you to pull in an instagram feed.
 USAGE
 ####
 
---- getMyStream
+--- getMyStream ---
 
 <div id="me" />
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
-<script src="javascripts/jquery.instagram.js"></script>
-
 $(document).ready(function() {
 	$("#me").instagram('getMyStream', {
-		count: "12"
+		count: 5
 	});
 });
 
 
---- getUserStream
+--- getUserStream ---
 
 <div id="user" />
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
-<script src="javascripts/jquery.instagram.js"></script>
-
 $(document).ready(function() {
 	$("#user").instagram('getUserStream', {
-		count: "12",
+		count: 5,
 		user: 1574083
 	});
 });
 
 
---- getMyLikes
+--- getMyLikes ---
 
 <div id="myLikes" />
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
-<script src="javascripts/jquery.instagram.js"></script>
-
 $(document).ready(function() {
 	$("#myLikes").instagram('getMyLikes', {
-		count: "12"
+		count: 5
 	});
 });
+
+--- getPopularStream ---
+
+<div id="popular" />
+
+$(document).ready(function() {
+	$("#popular").instagram('getPopularStream', {
+		count: 5
+	});
+});
+
+--- getStreamByTag ---
+
+<div id="search" />
+
+$(document).ready(function() {
+	$("#search").instagram('getStreamByTag', {
+		count: 5,
+		tag: 'transformers'
+	});
+});
+

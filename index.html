@@ -37,6 +37,10 @@
 				<div id="user"></div>
 				<h1>My Likes Feed</h1>
 				<div id="myLikes"></div>
+				<h1>Popular</h1>
+				<div id="popular"></div>
+				<h1>Tagged Search</h1>
+				<div id="search"></div>
 			</section>
 
 	        <footer>
@@ -51,16 +55,25 @@
         <script type="text/javascript">
         	$(document).ready(function(){	
         	    $("#me").instagram('getMyStream', {
-					count: "4"
+					count: 4
 				});
 				
 				$("#user").instagram('getUserStream', {
-					count: "4",
+					count: 4,
 					user: 1574083
 				});
 				
 				$("#myLikes").instagram('getMyLikes', {
-					count: "4"
+					count: 4
+				});
+				
+				$("#popular").instagram('getPopularStream', {
+				    count: 4
+				});
+				
+				$("#search").instagram('getStreamByTag', {
+				    count: 4,
+				    tag: 'transformers'
 				});
 			});
         </script>
