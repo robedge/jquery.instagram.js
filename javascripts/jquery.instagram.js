@@ -1,6 +1,6 @@
 (function ($) {
     var settings = {
-        authToken: "", // replace with your token or pass a new value in the settings
+        authToken: "332178.5532830.304dcae9620749e086bac69712af2051", // replace with your token or pass a new value in the settings
         loadingMessage: "Finding and loading instagram stream...", // This can be any html you want to show for loading
         count: 10
     }
