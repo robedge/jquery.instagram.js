@@ -120,7 +120,7 @@
         } else if (typeof method === 'object' || !method) {
             return methods.init.apply(this, arguments);
         } else {
-            $.error('Method ' + method + ' does not exist on jQuery.instagram');
+            $.error('Method ' + method + ' does not exist on jquery.instagram');
         }
 
     };
