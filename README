@@ -22,7 +22,7 @@ $(document).ready(function() {
 <div id="user" />
 
 $(document).ready(function() {
-	$("#user").instagram('getUserStream', {
+	$("#user").instagram('getStream', {
 		count: 5,
 		user: 1574083
 	});

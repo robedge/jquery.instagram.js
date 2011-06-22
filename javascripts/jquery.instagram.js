@@ -1,6 +1,6 @@
 (function ($) {
     var settings = {
-        authToken: "", // replace with your token or pass a new value in the settings
+        authToken: "332178.5532830.304dcae9620749e086bac69712af2051", // replace with your token or pass a new value in the settings
         loadingMessage: "Finding and loading instagram stream...", // This can be any html you want to show for loading
         count: 10
     }
@@ -8,34 +8,21 @@
         /**
          * Get images from your own stream
          */
-        getMyStream: function (options) {
+        getStream: function (options) {
             if (options) {
                 $.extend(settings, options);
             }
 
             var $e = this;
-            initLoad($e, function() {
-                getInstagramFeed(
-                    $e, 
-                    settings, 
-                    'https://api.instagram.com/v1/users/self/media/recent?count=' + settings.count + '&access_token=' + settings.authToken);
-            });
-        },
-        /**
-         * Get images from your own stream
-         */
-        getUserStream: function(options) {
-            if (options) {
-                $.extend(settings, options);
+            var url = 'https://api.instagram.com/v1/users/self/media/recent?count=' + settings.count + '&access_token=' + settings.authToken;
+            if (typeof(settings.user) != 'undefined') {
+                url = 'https://api.instagram.com/v1/users/' + settings.user + '/media/recent?count=' + settings.count + '&access_token=' + settings.authToken
             }
-
-            var $e = this;
             initLoad($e, function() {
                 getInstagramFeed(
                     $e, 
                     settings, 
-                    'https://api.instagram.com/v1/users/' + settings.user + '/media/recent?count=' + settings.count + '&access_token=' + settings.authToken
-                );
+                    url);
             });
         },
         /**
