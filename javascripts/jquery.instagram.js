@@ -22,7 +22,8 @@
                 getInstagramFeed(
                     $e, 
                     settings, 
-                    url);
+                    url
+                );
             });
         },
         /**
@@ -59,6 +60,9 @@
                 );
             });
         },
+        /**
+          * Get the stream by a tag search
+          */
         getStreamByTag: function(options) {
             if (options) {
                 $.extend(settings, options);
@@ -72,7 +76,7 @@
                     'https://api.instagram.com/v1/tags/' + settings.tag + '/media/recent?count=' + settings.count + '&access_token=' + settings.authToken
                 );
             });
-        },
+        }
     };
 
     function initLoad(e, callback) {
@@ -89,13 +93,29 @@
             dataType: 'jsonp',
             success: function (result) {
                 e.html("");
+                
                 $.each(result.data, function (i) {
                     e.append("<img style='display: none;' id='" + id + '_'  + i + "' class='instagramPhoto' src='" + settings.defaultImage + "' />");
                     
-                    $('#' + id + '_' + i).load(function () {
+                    $('#' + id + '_' + i).data('user', this.user).load(function () {
                         $(this).fadeIn('fast');
                     }).attr('src', this.images.thumbnail.url);
                 });
+                
+                if (!$.isEmptyObject(result.pagination)) {
+                    var next = $('<a class="more" href="#">more</a>').click(function() {
+                        initLoad(e, function() {
+                            getInstagramFeed(
+                                e,
+                                settings,
+                                result.pagination.next_url
+                            );
+                        });
+                        
+                        return false;
+                    });
+                    e.append(next);
+                }
             }
         });
     }
