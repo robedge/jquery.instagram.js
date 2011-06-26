@@ -1,5 +1,8 @@
 ####
 This is a basic jquery plugin that will allow you to pull in an instagram feed.
+
+The user data for the uploader of the image is attached to the image in the jquery data.  
+You can access it by using $('#id').data('user')
 ####
 
 ####
