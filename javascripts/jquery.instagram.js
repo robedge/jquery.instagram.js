@@ -118,7 +118,10 @@
             dataType: 'jsonp',
             success: function (result) {
                 e.empty();
-                
+				if ( (result.meta && result.meta.code) != 200 ) {
+					e.html("<span class='instagramError'>" + result.meta.error_message + "</span>");
+					return;
+				}
                 $.each(result.data, function (i) {
                     e.append("<img style='display: none;' id='" + id + '_'  + i + "' class='instagramPhoto' />");
                     
