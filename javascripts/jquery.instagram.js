@@ -92,7 +92,7 @@
             url: url,
             dataType: 'jsonp',
             success: function (result) {
-                e.html("");
+                e.empty();
                 
                 $.each(result.data, function (i) {
                     e.append("<img style='display: none;' id='" + id + '_'  + i + "' class='instagramPhoto' src='" + settings.defaultImage + "' />");
