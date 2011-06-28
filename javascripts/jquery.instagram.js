@@ -20,7 +20,8 @@
         loadingMessage: "Finding and loading instagram stream...", // This can be any html you want to show for loading
         count: 10,
         moreText: 'More',
-        resetText: 'Reset'
+        resetText: 'Reset',
+        callback: ''
     }
     var methods = {
         /**
@@ -40,7 +41,8 @@
                 getInstagramFeed(
                     $e, 
                     settings, 
-                    url
+                    url,
+                    settings.callback
                 );
             });
         },
@@ -103,8 +105,9 @@
             callback();
         }
     }
-
-    function getInstagramFeed(e, settings, url) {
+    
+    var calledback = false;
+    function getInstagramFeed(e, settings, url, callback) {
         var id = e.attr('id');
         if (typeof(e.data('baseUrl')) == 'undefined') {
             e.data('baseUrl', url);
@@ -131,11 +134,13 @@
                 
                 if (!$.isEmptyObject(result.pagination)) {
                     var next = $('<a class="more" href="#">' + settings.moreText + '</a>').click(function() {
+                        calledback = false;
                         initLoad(e, function() {
                             getInstagramFeed(
                                 e,
                                 settings,
-                                result.pagination.next_url
+                                result.pagination.next_url,
+                                settings.callback
                             );
                         });
                         
@@ -155,6 +160,13 @@
                         return false;
                     });
                     e.append(reset);
+                }
+                
+                if (!calledback) {
+                    if (typeof(callback) == 'function') {
+                        calledback = true;
+                        callback();
+                    }
                 }
             }
         });

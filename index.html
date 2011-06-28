@@ -55,7 +55,16 @@
         <script type="text/javascript">
         	$(document).ready(function(){	
         	    $("#me").instagram('getStream', {
-					count: 4
+					count: 4,
+					callback: function() {
+						$.each($('#me img'), function() {
+							var $this = $(this);
+							var largeUrl = $this.data('altImageSizes').standard_resolution.url;
+							$(this).click(function() {
+								window.open(largeUrl); 
+							});
+						});
+					}
 				});
 				
 				$("#user").instagram('getStream', {
