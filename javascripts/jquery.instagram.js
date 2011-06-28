@@ -132,6 +132,7 @@
                     $item.data('user', this.user);
                     $item.data('altImageSizes', this.images);
                     $item.data('caption', this.caption);
+                    $item.data('instagramLink', this.link);
                     
                     $item.load(function () {
                         $(this).fadeIn('fast');
