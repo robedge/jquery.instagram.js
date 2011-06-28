@@ -75,7 +75,7 @@
 									html += ': ' + $(this).data('caption').text;
 								}
 								
-								$(document).mousemove(function(e){
+								$this.mousemove(function(e){
 									$caption.css({left: e.pageX, top: e.pageY});
 								});
 				
@@ -108,7 +108,7 @@
 									html += ': ' + $(this).data('caption').text;
 								}
 								
-								$(document).mousemove(function(e){
+								$this.mousemove(function(e){
 									$caption.css({left: e.pageX, top: e.pageY});
 								});
 								
@@ -140,7 +140,7 @@
 									html += ': ' + $(this).data('caption').text;
 								}
 								
-								$(document).mousemove(function(e){
+								$this.mousemove(function(e){
 									$caption.css({left: e.pageX, top: e.pageY});
 								});
 								
@@ -172,7 +172,7 @@
 									html += ': ' + $(this).data('caption').text;
 								}
 								
-								$(document).mousemove(function(e){
+								$this.mousemove(function(e){
 									$caption.css({left: e.pageX, top: e.pageY});
 								});
 								
@@ -204,6 +204,10 @@
 								if ($this.data('caption') != null) {
 									html += ': ' + $(this).data('caption').text;
 								}
+								
+								$this.mousemove(function(e){
+									$caption.css({left: e.pageX, top: e.pageY});
+								});
 								
 								$caption.html(html);
 								$caption.animate({

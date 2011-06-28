@@ -45,7 +45,7 @@ $(document).ready(function(){
 						html += ': ' + $(this).data('caption').text;
 					}
 					
-					$(document).mousemove(function(e){
+					$this.mousemove(function(e){
 						$caption.css({left: e.pageX, top: e.pageY});
 					});
 	
