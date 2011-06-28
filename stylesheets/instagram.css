@@ -40,3 +40,10 @@
     position: relative;
     float: right;
 }
+
+.instagramError { 
+	border: 1px solid #C46E6E;
+	background: #FAF0F0;
+	color: #8A0000;
+	padding: 1em;
+}
