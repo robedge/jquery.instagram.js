@@ -37,6 +37,7 @@
             if (typeof(settings.user) != 'undefined') {
                 url = 'https://api.instagram.com/v1/users/' + settings.user + '/media/recent?count=' + settings.count + '&access_token=' + settings.authToken
             }
+            
             initLoad($e, function() {
                 getInstagramFeed(
                     $e, 
@@ -59,7 +60,8 @@
                 getInstagramFeed(
                     $e,
                     settings,
-                    'https://api.instagram.com/v1/users/self/media/liked?count=' + settings.count + '&access_token=' + settings.authToken
+                    'https://api.instagram.com/v1/users/self/media/liked?count=' + settings.count + '&access_token=' + settings.authToken,
+                    settings.callback
                 );
             });
         },
@@ -76,7 +78,8 @@
                 getInstagramFeed(
                     $e,
                     settings,
-                    'https://api.instagram.com/v1/media/popular?count=' + settings.count + '&access_token=' + settings.authToken
+                    'https://api.instagram.com/v1/media/popular?count=' + settings.count + '&access_token=' + settings.authToken,
+                    settings.callback
                 );
             });
         },
@@ -93,7 +96,8 @@
                 getInstagramFeed(
                     $e,
                     settings,
-                    'https://api.instagram.com/v1/tags/' + settings.tag + '/media/recent?count=' + settings.count + '&access_token=' + settings.authToken
+                    'https://api.instagram.com/v1/tags/' + settings.tag + '/media/recent?count=' + settings.count + '&access_token=' + settings.authToken,
+                    settings.callback
                 );
             });
         }
@@ -106,7 +110,6 @@
         }
     }
     
-    var calledback = false;
     function getInstagramFeed(e, settings, url, callback) {
         var id = e.attr('id');
         if (typeof(e.data('baseUrl')) == 'undefined') {
@@ -137,7 +140,6 @@
                 
                 if (!$.isEmptyObject(result.pagination)) {
                     var next = $('<a class="more" href="#">' + settings.moreText + '</a>').click(function() {
-                        calledback = false;
                         initLoad(e, function() {
                             getInstagramFeed(
                                 e,
@@ -156,7 +158,8 @@
                             getInstagramFeed(
                                 e,
                                 settings,
-                                e.data('baseUrl')
+                                e.data('baseUrl'),
+                                settings.callback
                             );
                         });
                         
@@ -165,12 +168,10 @@
                     e.append(reset);
                 }
                 
-                if (!calledback) {
-                    if (typeof(callback) == 'function') {
-                        calledback = true;
-                        callback();
-                    }
+                if (typeof(callback) == 'function') {
+                    callback();
                 }
+                
             }
         });
     } 

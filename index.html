@@ -53,14 +53,14 @@
         <script src="javascripts/jquery.instagram.js"></script>
         
         <script type="text/javascript">
-        	$(document).ready(function(){	
+        	$(document).ready(function(){
         	    $("#me").instagram('getStream', {
 					count: 4,
 					callback: function() {
 						$.each($('#me img'), function() {
 							var $this = $(this);
 							var largeUrl = $this.data('altImageSizes').standard_resolution.url;
-							$(this).click(function() {
+							$this.click(function() {
 								window.open(largeUrl); 
 							});
 						});
@@ -69,20 +69,56 @@
 				
 				$("#user").instagram('getStream', {
 					count: 4,
-					user: 1574083
+					user: 1574083,
+					callback: function() {
+						$.each($('#user img'), function() {
+							var $this = $(this);
+							var largeUrl = $this.data('altImageSizes').standard_resolution.url;
+							$this.click(function() {
+								window.open(largeUrl); 
+							});
+						});
+					}
 				});
 				
 				$("#myLikes").instagram('getMyLikes', {
-					count: 4
+					count: 4,
+					callback: function() {
+						$.each($('#myLikes img'), function() {
+							var $this = $(this);
+							var largeUrl = $this.data('altImageSizes').standard_resolution.url;
+							$this.click(function() {
+								window.open(largeUrl); 
+							});
+						});
+					}
 				});
 				
 				$("#popular").instagram('getPopularStream', {
-				    count: 4
+				    count: 4,
+				    callback: function() {
+						$.each($('#popular img'), function() {
+							var $this = $(this);
+							var largeUrl = $this.data('altImageSizes').standard_resolution.url;
+							$this.click(function() {
+								window.open(largeUrl); 
+							});
+						});
+					}
 				});
 				
 				$("#search").instagram('getStreamByTag', {
 				    count: 4,
-				    tag: 'transformers'
+				    tag: 'transformers',
+				    callback: function() {
+						$.each($('#search img'), function() {
+							var $this = $(this);
+							var largeUrl = $this.data('altImageSizes').standard_resolution.url;
+							$this.click(function() {
+								window.open(largeUrl); 
+							});
+						});
+					}
 				});
 			});
         </script>
