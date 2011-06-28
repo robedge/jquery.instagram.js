@@ -41,6 +41,8 @@
 				<div id="popular"></div>
 				<h1>Tagged Search</h1>
 				<div id="search"></div>
+				
+				<div style="margin-left: 15px; padding: 5px; background-color: #a7a7a7; position: absolute; opacity: 0; filter:alpha(opacity=0)" class="caption"></div>
 			</section>
 
 	        <footer>
@@ -54,14 +56,37 @@
         
         <script type="text/javascript">
         	$(document).ready(function(){
+        		var $caption = $('.caption');
+        		
+        		
         	    $("#me").instagram('getStream', {
 					count: 4,
 					callback: function() {
 						$.each($('#me img'), function() {
 							var $this = $(this);
 							var largeUrl = $this.data('altImageSizes').standard_resolution.url;
+							
 							$this.click(function() {
 								window.open(largeUrl); 
+							}).mouseover(function() {
+								
+								var html = $this.data('user').username;
+								if ($this.data('caption') != null) {
+									html += ': ' + $(this).data('caption').text;
+								}
+								
+								$(document).mousemove(function(e){
+									$caption.css({left: e.pageX, top: e.pageY});
+								});
+				
+								$caption.html(html);
+								$caption.animate({
+								  opacity: 1
+								}, {queue: false});
+							}).mouseout(function(){
+								$caption.animate({
+								  opacity: 0
+								}, {queue: false});
 							});
 						});
 					}
@@ -76,6 +101,25 @@
 							var largeUrl = $this.data('altImageSizes').standard_resolution.url;
 							$this.click(function() {
 								window.open(largeUrl); 
+							}).mouseover(function() {
+								
+								var html = $this.data('user').username;
+								if ($this.data('caption') != null) {
+									html += ': ' + $(this).data('caption').text;
+								}
+								
+								$(document).mousemove(function(e){
+									$caption.css({left: e.pageX, top: e.pageY});
+								});
+								
+								$caption.html(html);
+								$caption.animate({
+								  opacity: 1
+								}, {queue: false});
+							}).mouseout(function(){
+								$caption.animate({
+								  opacity: 0
+								}, {queue: false});
 							});
 						});
 					}
@@ -89,6 +133,25 @@
 							var largeUrl = $this.data('altImageSizes').standard_resolution.url;
 							$this.click(function() {
 								window.open(largeUrl); 
+							}).mouseover(function() {
+								
+								var html = $this.data('user').username;
+								if ($this.data('caption') != null) {
+									html += ': ' + $(this).data('caption').text;
+								}
+								
+								$(document).mousemove(function(e){
+									$caption.css({left: e.pageX, top: e.pageY});
+								});
+								
+								$caption.html(html);
+								$caption.animate({
+								  opacity: 1
+								}, {queue: false});
+							}).mouseout(function(){
+								$caption.animate({
+								  opacity: 0
+								}, {queue: false});
 							});
 						});
 					}
@@ -102,6 +165,25 @@
 							var largeUrl = $this.data('altImageSizes').standard_resolution.url;
 							$this.click(function() {
 								window.open(largeUrl); 
+							}).mouseover(function() {
+								
+								var html = $this.data('user').username;
+								if ($this.data('caption') != null) {
+									html += ': ' + $(this).data('caption').text;
+								}
+								
+								$(document).mousemove(function(e){
+									$caption.css({left: e.pageX, top: e.pageY});
+								});
+								
+								$caption.html(html);
+								$caption.animate({
+								  opacity: 1
+								}, {queue: false});
+							}).mouseout(function(){
+								$caption.animate({
+								  opacity: 0
+								}, {queue: false});
 							});
 						});
 					}
@@ -116,6 +198,21 @@
 							var largeUrl = $this.data('altImageSizes').standard_resolution.url;
 							$this.click(function() {
 								window.open(largeUrl); 
+							}).mouseover(function() {
+								
+								var html = $this.data('user').username;
+								if ($this.data('caption') != null) {
+									html += ': ' + $(this).data('caption').text;
+								}
+								
+								$caption.html(html);
+								$caption.animate({
+								  opacity: 1
+								}, {queue: false});
+							}).mouseout(function(){
+								$caption.animate({
+								  opacity: 0
+								}, {queue: false});
 							});
 						});
 					}

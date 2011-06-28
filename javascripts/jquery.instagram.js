@@ -146,7 +146,7 @@
                                 e,
                                 settings,
                                 result.pagination.next_url,
-                                settings.callback
+                                callback
                             );
                         });
                         
@@ -160,7 +160,7 @@
                                 e,
                                 settings,
                                 e.data('baseUrl'),
-                                settings.callback
+                                callback
                             );
                         });
                         
