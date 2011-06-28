@@ -142,7 +142,7 @@
                 }
             }
         });
-    }
+    } 
 
     $.fn.instagram = function (method) {
         // Method calling logic
