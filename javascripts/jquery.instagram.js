@@ -2,7 +2,9 @@
     var settings = {
         authToken: "332178.5532830.304dcae9620749e086bac69712af2051", // replace with your token or pass a new value in the settings
         loadingMessage: "Finding and loading instagram stream...", // This can be any html you want to show for loading
-        count: 10
+        count: 10,
+        moreText: 'More',
+        resetText: 'Reset'
     }
     var methods = {
         /**
@@ -88,6 +90,10 @@
 
     function getInstagramFeed(e, settings, url) {
         var id = e.attr('id');
+        if (typeof(e.data('baseUrl')) == 'undefined') {
+            e.data('baseUrl', url);
+        }
+        
         $.ajax({
             url: url,
             dataType: 'jsonp',
@@ -98,15 +104,20 @@
 					return;
 				}
                 $.each(result.data, function (i) {
-                    e.append("<img style='display: none;' id='" + id + '_'  + i + "' class='instagramPhoto' src='" + settings.defaultImage + "' />");
+                    e.append("<img style='display: none;' id='" + id + '_'  + i + "' class='instagramPhoto' />");
                     
-                    $('#' + id + '_' + i).data('user', this.user).load(function () {
+                    var $item = $('#' + id + '_' + i);
+                    $item.data('user', this.user);
+                    $item.data('altImageSizes', this.images);
+                    $item.data('caption', this.caption);
+                    
+                    $item.load(function () {
                         $(this).fadeIn('fast');
                     }).attr('src', this.images.thumbnail.url);
                 });
                 
                 if (!$.isEmptyObject(result.pagination)) {
-                    var next = $('<a class="more" href="#">more</a>').click(function() {
+                    var next = $('<a class="more" href="#">' + settings.moreText + '</a>').click(function() {
                         initLoad(e, function() {
                             getInstagramFeed(
                                 e,
@@ -118,10 +129,23 @@
                         return false;
                     });
                     e.append(next);
+                } else {
+                    var reset = $('<a class="reset" href="#">' + settings.resetText + '</a>').click(function() {
+                        initLoad(e, function() {
+                            getInstagramFeed(
+                                e,
+                                settings,
+                                e.data('baseUrl')
+                            );
+                        });
+                        
+                        return false;
+                    });
+                    e.append(reset);
                 }
             }
         });
-    }
+    } 
 
     $.fn.instagram = function (method) {
         // Method calling logic
