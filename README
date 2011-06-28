@@ -9,6 +9,8 @@ that is created.
 
 To get altImageSizes object use var altImages = $('#me_0').data('altImageSizes');
 To get Caption object use var caption = $('#me_0').data('caption');
+To get User object var user = $('#me_0').data('user');
+To get link to Instagram image page var link = $('#me_0').data('instagramLink');
 
 *** me_0 is the id of the element you wish to get data for, so this would change for each image.
 
