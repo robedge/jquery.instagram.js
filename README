@@ -3,6 +3,15 @@ This is a basic jquery plugin that will allow you to pull in an instagram feed.
 
 The user data for the uploader of the image is attached to the image in the jquery data.  
 You can access it by using $('#id').data('user')
+
+Alternate image sizes are available as well as caption data.  They are attached to the image element 
+that is created.
+
+To get altImageSizes object use var altImages = $('#me_0').data('altImageSizes');
+To get Caption object use var caption = $('#me_0').data('caption');
+
+*** me_0 is the id of the element you wish to get data for, so this would change for each image.
+
 ####
 
 ####
