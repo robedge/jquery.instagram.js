@@ -128,7 +128,7 @@
 					return;
 				}
                 $.each(result.data, function (i) {
-                    var img = $('<img></img>').css({display: 'none'}).attr('id', id + '_' + i).addClass('instagramPhoto');
+                    var img = $('<img></img>').css({display: 'none'}).attr({id: id + '_' + i}).addClass('instagramPhoto');
                     e.append(img);
                     
                     var $item = $('#' + id + '_' + i);
