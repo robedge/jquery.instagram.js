@@ -104,7 +104,8 @@
     };
 
     function initLoad(e, callback) {
-        e.html("<div id='instagramLoadingMessage'>" + settings.loadingMessage + "</div>");
+        var loading = $('<div></div>').attr({id: 'instagramLoadingMessage'}).html(settings.loadingMessage);
+        e.empty().append(loading);
         if (typeof(callback) == 'function') {
             callback();
         }
@@ -122,11 +123,13 @@
             success: function (result) {
                 e.empty();
 				if ( (result.meta && result.meta.code) != 200 ) {
-					e.html("<span class='instagramError'>" + result.meta.error_message + "</span>");
+                    var error = $('<span></span>').addClass('instagramError');
+					e.append(error);
 					return;
 				}
                 $.each(result.data, function (i) {
-                    e.append("<img style='display: none;' id='" + id + '_'  + i + "' class='instagramPhoto' />");
+                    var img = $('<img></img>').css({display: 'none'}).attr('id', id + '_' + i).addClass('instagramPhoto');
+                    e.append(img);
                     
                     var $item = $('#' + id + '_' + i);
                     $item.data('user', this.user);
@@ -140,7 +143,7 @@
                 });
                 
                 if (!$.isEmptyObject(result.pagination)) {
-                    var next = $('<a class="more" href="#">' + settings.moreText + '</a>').click(function() {
+                    var next = $('<a></a>').attr({href: '#'}).addClass('more').html(settings.moreText).click(function() {
                         initLoad(e, function() {
                             getInstagramFeed(
                                 e,
@@ -154,7 +157,7 @@
                     });
                     e.append(next);
                 } else {
-                    var reset = $('<a class="reset" href="#">' + settings.resetText + '</a>').click(function() {
+                    var reset = $('<a></a>').attr({href: '#'}).addClass('reset').html(settings.resetText).click(function() {
                         initLoad(e, function() {
                             getInstagramFeed(
                                 e,
