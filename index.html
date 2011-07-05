@@ -33,6 +33,9 @@
             <section id="articles">
                 <h1>My Feed</h1>
 				<div id="me"></div>
+				<div id="pagesLeft"></div>
+				
+				<!--
 				<h1>Snoop's Feed</h1>
 				<div id="user"></div>
 				<h1>My Likes Feed</h1>
@@ -41,6 +44,7 @@
 				<div id="popular"></div>
 				<h1>Tagged Search</h1>
 				<div id="search"></div>
+				-->
 				
 				<div style="margin-left: 15px; padding: 5px; background-color: #a7a7a7; position: absolute; opacity: 0; filter:alpha(opacity=0)" class="caption"></div>
 			</section>
@@ -58,10 +62,18 @@
         	$(document).ready(function(){
         		var $caption = $('.caption');
         		
-        		
         	    $("#me").instagram('getStream', {
 					count: 4,
+					getUser: true,
 					callback: function() {
+					    // show page numbers
+					    $totalPages = $('#me').data('pages');
+					    $pageHolder = $('#pagesLeft');
+					    
+					    if(typeof($totalPages) != 'undefined') {
+    					    $pageHolder.html($totalPages + ' pages left');
+    				    }
+						
 						$.each($('#me img'), function() {
 							var $this = $(this);
 							var largeUrl = $this.data('altImageSizes').standard_resolution.url;
@@ -92,9 +104,11 @@
 					}
 				});
 				
+				/*
 				$("#user").instagram('getStream', {
 					count: 4,
 					user: 1574083,
+					getUser: false,
 					callback: function() {
 						$.each($('#user img'), function() {
 							var $this = $(this);
@@ -127,6 +141,7 @@
 				
 				$("#myLikes").instagram('getMyLikes', {
 					count: 4,
+					getUser: false,
 					callback: function() {
 						$.each($('#myLikes img'), function() {
 							var $this = $(this);
@@ -159,6 +174,7 @@
 				
 				$("#popular").instagram('getPopularStream', {
 				    count: 4,
+				    getUser: false,
 				    callback: function() {
 						$.each($('#popular img'), function() {
 							var $this = $(this);
@@ -191,6 +207,7 @@
 				
 				$("#search").instagram('getStreamByTag', {
 				    count: 4,
+				    getUser: false,
 				    tag: 'transformers',
 				    callback: function() {
 						$.each($('#search img'), function() {
@@ -221,6 +238,7 @@
 						});
 					}
 				});
+				*/
 			});
         </script>
     </body>

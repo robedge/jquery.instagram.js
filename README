@@ -24,14 +24,24 @@ USAGE
 
 <div id="me" />
 <div style="margin-left: 15px; padding: 5px; background-color: #a7a7a7; position: absolute; opacity: 0; filter:alpha(opacity=0)" class="caption"></div>
+<div id="pagesLeft"></div>
 
 $(document).ready(function(){
 	var $caption = $('.caption');
 	
 	
-	$("#me").instagram('getStream', {
+    $("#me").instagram('getStream', {
 		count: 4,
+		getUser: true,
 		callback: function() {
+		    // show page numbers
+		    $totalPages = $('#me').data('pages');
+		    $pageHolder = $('#pagesLeft');
+		    
+		    if(typeof($totalPages) != 'undefined') {
+			    $pageHolder.html($totalPages + ' pages left');
+		    }
+			
 			$.each($('#me img'), function() {
 				var $this = $(this);
 				var largeUrl = $this.data('altImageSizes').standard_resolution.url;
@@ -61,7 +71,6 @@ $(document).ready(function(){
 			});
 		}
 	});
-});
 
 
 --- getUserStream ---

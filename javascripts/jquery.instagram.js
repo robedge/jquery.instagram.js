@@ -21,7 +21,8 @@
         count: 10,
         moreText: 'More',
         resetText: 'Reset',
-        callback: ''
+        callback: '',
+        getUser: true
     }
     var methods = {
         /**
@@ -31,7 +32,7 @@
             if (options) {
                 $.extend(settings, options);
             }
-
+            
             var $e = this;
             var url = 'https://api.instagram.com/v1/users/self/media/recent?count=' + settings.count + '&access_token=' + settings.authToken;
             if (typeof(settings.user) != 'undefined') {
@@ -100,15 +101,54 @@
                     settings.callback
                 );
             });
+        },
+        /**
+          * Get user data
+          */
+        getUserData: function(options, e, callback) {
+            if (options) {
+                $.extend(settings, options);
+            }
+            
+            var $e = $(this);
+            var url = 'https://api.instagram.com/v1/users/self?access_token=' + settings.authToken;
+            if (typeof(settings.user) != 'undefined') {
+                url = 'https://api.instagram.com/v1/users/' + settings.user + '?access_token=' + settings.authToken
+            }
+            
+            getUserData(e, settings, url, callback);
         }
     };
 
     function initLoad(e, callback) {
         var loading = $('<div></div>').attr({id: 'instagramLoadingMessage'}).html(settings.loadingMessage);
         e.empty().append(loading);
-        if (typeof(callback) == 'function') {
-            callback();
+        
+        if ($.isEmptyObject(e.data('userData')) && settings.getUser == true) {
+            methods.getUserData(settings, e, function() {
+                if (typeof(callback) == 'function') {
+                    callback();
+                }
+            });
+        } else {
+            if (typeof(callback) == 'function') {
+                callback();
+            }
         }
+    }
+    
+    function getUserData(e, settings, url, callback) {
+        $.ajax({
+            url: url, 
+            dataType: 'jsonp',
+            success: function(result) {
+                e.data('userData', result.data);
+                e.data('pages', Math.ceil(result.data.counts.media/settings.count) - 1);
+                if (typeof(callback) == 'function') {
+                    callback();
+                } 
+            }
+        });
     }
     
     function getInstagramFeed(e, settings, url, callback) {
@@ -122,6 +162,8 @@
             dataType: 'jsonp',
             success: function (result) {
                 e.empty();
+                
+                
 				if ( (result.meta && result.meta.code) != 200 ) {
                     var error = $('<span></span>').addClass('instagramError');
 					e.append(error);
@@ -143,7 +185,7 @@
                 });
                 
                 if (!$.isEmptyObject(result.pagination)) {
-                    var next = $('<a></a>').attr({href: '#'}).addClass('more').html(settings.moreText).click(function() {
+                    var next = $('<a></a>').attr({href: '#', id: 'more'}).addClass('more').html(settings.moreText).click(function() {
                         initLoad(e, function() {
                             getInstagramFeed(
                                 e,
@@ -152,12 +194,15 @@
                                 callback
                             );
                         });
+                        e.data('pages', e.data('pages') - 1);
                         
                         return false;
                     });
                     e.append(next);
                 } else {
-                    var reset = $('<a></a>').attr({href: '#'}).addClass('reset').html(settings.resetText).click(function() {
+                    var reset = $('<a></a>').attr({href: '#', id: 'reset'}).addClass('reset').html(settings.resetText).click(function() {
+                        e.data('userData', {});
+                        
                         initLoad(e, function() {
                             getInstagramFeed(
                                 e,
