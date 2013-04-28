@@ -45,10 +45,11 @@ link to instagram page:
 var link = $('#image').data('instagramLink');
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-### 
-Methods:
 
-getMyStream:
+Methods:
+---------
+
+**getMyStream:**
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <div id="feed" />
@@ -74,7 +75,7 @@ $('#feed').instagram('getStream', {
 
 
 
-getUserStream:
+**getUserStream:**
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <div id="user" />
@@ -89,7 +90,7 @@ $(document).ready(function() {
 
 
 
-getMyLikes:
+**getMyLikes:**
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <div id="myLikes" />
@@ -103,7 +104,7 @@ $(document).ready(function() {
 
 
 
-getPopularStream:
+**getPopularStream:**
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <div id="popular" />
@@ -117,7 +118,7 @@ $(document).ready(function() {
 
 
 
-getStreamByTag:
+**getStreamByTag:**
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <div id="search" />
