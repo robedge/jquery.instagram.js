@@ -21,25 +21,25 @@ to the image element that is created.
 
 
 
-altImageSizes:
+**Alternate image sizes: **
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 var altImages = $('#image').data('altImageSizes');
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-caption:
+**Caption:**
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 var caption = $('#image').data('caption');
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-user info:
+**User information:**
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 var user = $('#image').data('user');
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-link to instagram page:
+**Link to Instagram page:**
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 var link = $('#image').data('instagramLink');
@@ -64,7 +64,7 @@ $('#feed').instagram('getStream', {
         // loop through images and link to instagram
         $.each($('#feed img'), function() {
             var $this= $(this);
-            var url = $this.data('altImageSizes').standard_resolution.url;
+            var url = $this.data('instagramLink');
             $this.click(function() {
                 window.open(url);
             });
