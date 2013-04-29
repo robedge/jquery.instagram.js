@@ -31,6 +31,14 @@
             </header>
             
             <section id="articles">
+            	<h1>Search User</h1>
+            	<form id="search">
+            		<label for="username">Username:</label>
+            		<input type="text" name="username" id="username" />
+            		<input type="submit" value="Search" />
+            	</form>
+            	<div id="search_results"></div>
+
                 <h1>My Feed</h1>
 				<div id="me"></div>
 				<div id="pagesLeft"></div>
@@ -55,12 +63,65 @@
 	        </footer>
 		</section> 
         
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+		<script src="http://code.jquery.com/jquery-migrate-1.1.1.min.js"></script>
+
         <script src="javascripts/jquery.instagram.js"></script>
         
         <script type="text/javascript">
         	$(document).ready(function(){
         		var $caption = $('.caption');
+
+        		$('#search').submit(function(e) {
+        			e.preventDefault();
+        			var $search_results = $('#search_results');
+        			$search_results.instagram('searchForUserByName', {
+        				name: $('input[name=username]').val(),
+        				callback: function(result) {
+        					$search_results.html('<p>click a photo to load user info.</p>');
+
+        					$.each(result.data, function(i) {
+        						$search_results.append($(document.createElement('div'))
+        								.attr({'id':result.data[i].username})
+        							.html($(document.createElement('img'))
+        								.attr({'src': result.data[i].profile_picture}))
+        							.click(function() {
+    									$search_results.html('Getting user info...');
+        								$(document.createElement('div')).instagram('getUserData', {
+        									user: result.data[i].id,
+        									callback: function(result) {
+        										$search_results.html('');
+
+        										var $user_image = $(document.createElement('img')).attr({'src':result.data.profile_picture});
+        										var $bio = $(document.createElement('p')).html('bio: ' + result.data.bio);
+
+        										// counts 
+        										$followed_by = $(document.createElement('p')).html('followed by: ' + result.data.counts.followed_by);
+        										$follows = $(document.createElement('p')).html('follows: ' + result.data.counts.follows);
+        										$media = $(document.createElement('p')).html('media: ' + result.data.counts.media);
+
+        										$counts = $(document.createElement('div')).append($followed_by).append($follows).append($media);
+
+        										$fullname = $(document.createElement('p')).html('fullname: ' + result.data.full_name);
+        										$username = $(document.createElement('p')).html('username: ' + result.data.username);
+        										$website = $(document.createElement('p')).html('website: ' + result.data.website);
+
+    											$search_results
+    												.append($user_image)
+    												.append($bio)
+    												.append($counts)
+    												.append($fullname)
+    												.append($username)
+    												.append($website)
+        									}
+        								});
+        							})
+        							.append('<p>'+result.data[i].username+'</p>')
+        						)
+        					});
+        				}
+        			})
+        		});
         		
         	    $("#me").instagram('getStream', {
 					count: 4,
@@ -82,19 +143,21 @@
 								window.open(largeUrl); 
 							}).mouseover(function() {
 								
-								var html = $this.data('user').username;
 								if ($this.data('caption') != null) {
-									html += ': ' + $(this).data('caption').text;
+									var html = $(this).data('caption').text;
 								}
 								
-								$this.mousemove(function(e){
-									$caption.css({left: e.pageX, top: e.pageY});
-								});
-				
-								$caption.html(html);
-								$caption.animate({
-								  opacity: 1
-								}, {queue: false});
+								if (html) {
+									$this.mousemove(function(e){
+										$caption.css({left: e.pageX, top: e.pageY});
+									});
+					
+									$caption.html(html);
+									$caption.animate({
+									  opacity: 1
+									}, {queue: false});	
+								}
+								
 							}).mouseout(function(){
 								$caption.animate({
 								  opacity: 0

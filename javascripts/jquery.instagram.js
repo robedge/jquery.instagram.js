@@ -105,7 +105,7 @@
         /**
           * Get user data
           */
-        getUserData: function(options, e, callback) {
+        getUserData: function(options) {
             if (options) {
                 $.extend(settings, options);
             }
@@ -116,7 +116,35 @@
                 url = 'https://api.instagram.com/v1/users/' + settings.user + '?access_token=' + settings.authToken
             }
             
-            getUserData(e, settings, url, callback);
+            initLoad($e, function() {
+                getUserData(
+                    $e,
+                    settings,
+                    url,
+                    settings.callback
+                );
+            })
+        },
+
+        /**
+          * Search for users by string
+          */
+
+        searchForUserByName: function(options) {
+            if (options) {
+                $.extend(settings, options);
+            }
+            settings.loadingMessage = "Looking up users.";
+            var $e = this;
+            initLoad($e, function() {
+                searchForUser(
+                    $e,
+                    settings,
+                    'https://api.instagram.com/v1/users/search?q=' + settings.name + '&access_token=' + settings.authToken,
+                    settings.callback
+                );
+            });
+
         }
     };
 
@@ -124,17 +152,11 @@
         var loading = $('<div></div>').attr({id: 'instagramLoadingMessage'}).html(settings.loadingMessage);
         e.empty().append(loading);
         
-        if ($.isEmptyObject(e.data('userData')) && settings.getUser == true) {
-            methods.getUserData(settings, e, function() {
-                if (typeof(callback) == 'function') {
-                    callback();
-                }
-            });
-        } else {
-            if (typeof(callback) == 'function') {
-                callback();
-            }
+        
+        if (typeof(callback) == 'function') {
+            callback();
         }
+        
     }
     
     function getUserData(e, settings, url, callback) {
@@ -145,12 +167,26 @@
                 e.data('userData', result.data);
                 e.data('pages', Math.ceil(result.data.counts.media/settings.count) - 1);
                 if (typeof(callback) == 'function') {
-                    callback();
+                    callback(result);
                 } 
             }
         });
     }
     
+    function searchForUser(e, settings, url, callback) {
+        $.ajax({
+            url: url, 
+            dataType: 'jsonp',
+            success: function(result) {
+                e.data('users', result.data);
+                if (typeof(callback) == 'function') {
+                    callback(result);
+                } 
+            }
+        });
+
+    }
+
     function getInstagramFeed(e, settings, url, callback) {
         var id = e.attr('id');
         if (typeof(e.data('baseUrl')) == 'undefined') {
@@ -174,7 +210,7 @@
                     e.append(img);
                     
                     var $item = $('#' + id + '_' + i);
-                    $item.data('user', this.user);
+                    //$item.data('user', this.user);
                     $item.data('altImageSizes', this.images);
                     $item.data('caption', this.caption);
                     $item.data('instagramLink', this.link);
