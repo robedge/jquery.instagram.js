@@ -10,7 +10,7 @@ to the image element that is created.
 
 
 
-**Alternate image sizes: **
+**Alternate image sizes:**
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 var altImages = $('#image').data('altImageSizes');
@@ -28,8 +28,7 @@ var caption = $('#image').data('caption');
 var link = $('#image').data('instagramLink');
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  
---
+
 
 Methods:
 --------
